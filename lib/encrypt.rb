@@ -10,9 +10,7 @@ class Encrypt
   end
 
   def output
-    p msg
-    p key
-    p date
+    msg
   end
 
 end
