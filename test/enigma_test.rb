@@ -17,11 +17,11 @@ class EnigmaTest < Minitest::Test
   def test_it_gives_todays_date
     e = Enigma.new
     assert_equal Date.today.strftime('%m%e%y'), e.today
-  end 
+  end
 
   def test_it_encrypts
     e = Enigma.new
-    assert_equal 'msg', e.encrypt('msg')
+    assert_equal 'y3 ws4l2skl5szko', e.encrypt('deal for you and', '12345', '020315')
   end
 
 end
