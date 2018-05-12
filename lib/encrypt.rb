@@ -40,7 +40,7 @@ class Encrypt
     r = 0
     msg.each do |char|
       if r == 4
-        r == 0
+        r = 0
       end
       if r == 0
         rot = a_rotation
@@ -51,6 +51,7 @@ class Encrypt
       elsif r == 3
         rot = d_rotation
       end
+      # binding.pry
       rot_num = char_map.index(char) + rot
       while rot_num > char_map.length
         rot_num = rot_num - char_map.length
