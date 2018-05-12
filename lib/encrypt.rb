@@ -8,7 +8,7 @@ class Encrypt
 
   def initialize(msg, key, date)
     @msg = msg.split(//)
-    @key = key.rjust(5, '0')
+    @key = key
     @date = date.to_s
     @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
 
