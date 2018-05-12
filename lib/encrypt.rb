@@ -1,4 +1,4 @@
-require './lib/rotation'
+require 'pry'
 
 class Encrypt
   attr_reader :msg,
@@ -11,6 +11,7 @@ class Encrypt
     @key = key.rjust(5, '0')
     @date = date.to_s
     @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
+
   end
 
   def a_rotation
@@ -35,12 +36,13 @@ class Encrypt
   end
 
   def output
-    r = 0
     enc_msg = []
+    r = 0
     msg.each do |char|
       if r == 4
-        r = 0
-      elsif r == 0
+        r == 0
+      end
+      if r == 0
         rot = a_rotation
       elsif r == 1
         rot = b_rotation
@@ -49,7 +51,11 @@ class Encrypt
       elsif r == 3
         rot = d_rotation
       end
-      enc_char = char_map[msg.index(char) + rot]
+      rot_num = char_map.index(char) + rot
+      while rot_num > char_map.length
+        rot_num = rot_num - char_map.length
+      end
+      enc_char = char_map[rot_num]
       enc_msg << enc_char
       r += 1
     end
