@@ -1,13 +1,13 @@
 require 'pry'
 
 class Encrypt
-  attr_reader :msg,
+  attr_reader :my_message,
               :key,
               :date,
               :char_map
 
-  def initialize(msg, key, date)
-    @msg = msg.split(//)
+  def initialize(my_message, key = '12345', date = '020315')
+    @my_message = my_message.split(//)
     @key = key
     @date = date.to_s
     @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
@@ -36,9 +36,9 @@ class Encrypt
   end
 
   def output
-    enc_msg = []
+    enc_my_message = []
     r = 0
-    msg.each do |char|
+    my_message.each do |char|
       if r == 4
         r = 0
       end
@@ -57,10 +57,10 @@ class Encrypt
         rot_num = rot_num - char_map.length
       end
       enc_char = char_map[rot_num]
-      enc_msg << enc_char
+      enc_my_message << enc_char
       r += 1
     end
-    enc_msg.join
+    enc_my_message.join
   end
 
 end
