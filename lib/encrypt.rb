@@ -11,7 +11,6 @@ class Encrypt
     @key = key
     @date = date.to_s
     @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
-
   end
 
   def a_rotation
@@ -52,12 +51,12 @@ class Encrypt
         rot = d_rotation
       end
       rot_num = char_map.index(char) + rot
-      binding.pry
+      # binding.pry
       while rot_num >= char_map.length
         rot_num = rot_num - char_map.length
       end
       enc_char = char_map[rot_num]
-      binding.pry
+      # binding.pry
       enc_msg << enc_char
       r += 1
     end

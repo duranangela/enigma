@@ -1,6 +1,6 @@
 require 'date'
 require './lib/encrypt'
-
+require './lib/decrypt'
 
 class Enigma
 
@@ -18,6 +18,11 @@ class Enigma
 
   def today
     Date.today.strftime('%m%e%y')
+  end
+
+  def decrypt(enc_msg, key, date = today)
+    dec_msg = Decrypt.new(enc_msg, key, date)
+    dec_msg.output
   end
 
 end
