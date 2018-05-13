@@ -44,5 +44,5 @@ class Encrypt
     end
     encrypted_message.join
   end
-
+  
 end

@@ -1,0 +1,2 @@
+class Crack
+end

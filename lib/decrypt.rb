@@ -44,6 +44,3 @@ class Decrypt
     end
     decrypted_message.join
   end
-
-
-end
