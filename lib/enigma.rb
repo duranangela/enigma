@@ -1,5 +1,6 @@
 require 'date'
 require './lib/encrypt'
+require 'pry'
 
 
 class Enigma
@@ -7,9 +8,9 @@ class Enigma
   def initialize
   end
 
-  def encrypt(msg, key = random_key, date = today)
-    encrypted_msg = Encrypt.new(msg, key, date)
-    encrypted_msg.output
+  def encrypt(my_message, key = random_key, date = today)
+    encrypted_my_message = Encrypt.new(my_message, key, date)
+    encrypted_my_message.output
   end
 
   def random_key
