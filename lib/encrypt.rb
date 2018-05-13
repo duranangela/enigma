@@ -1,66 +1,48 @@
+require './lib/rotation'
 require 'pry'
 
 class Encrypt
-  attr_reader :msg,
+  attr_reader :message,
               :key,
               :date,
               :char_map
 
-  def initialize(msg, key, date)
-    @msg = msg.split(//)
+  def initialize(message, key, date)
+    @message = message.split(//)
     @key = key
     @date = date.to_s
     @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
   end
 
-  def a_rotation
-    key[0..1].to_i + offset[0].to_i
-  end
-
-  def b_rotation
-    key[1..2].to_i + offset[1].to_i
-  end
-
-  def c_rotation
-    key[2..3].to_i + offset[2].to_i
-  end
-
-  def d_rotation
-    key[3..4].to_i + offset[3].to_i
-  end
-
-  def offset
-    date_code = (@date.to_i ** 2).to_s
-    date_code[-4..-1]
+  def rotation
+    Rotation.new(@key, @date)
   end
 
   def output
-    enc_msg = []
-    r = 0
-    msg.each do |char|
-      if r == 4
-        r = 0
+    encrypted_message = []
+    rot_increment = 0
+    message.each do |char|
+      if rot_increment == 4
+        rot_increment = 0
       end
-      if r == 0
-        rot = a_rotation
-      elsif r == 1
-        rot = b_rotation
-      elsif r == 2
-        rot = c_rotation
-      elsif r == 3
-        rot = d_rotation
+      if rot_increment == 0
+        rot = rotation.a_rotation
+      elsif rot_increment == 1
+        rot = rotation.b_rotation
+      elsif rot_increment == 2
+        rot = rotation.c_rotation
+      elsif rot_increment == 3
+        rot = rotation.d_rotation
       end
-      rot_num = char_map.index(char) + rot
-      # binding.pry
-      while rot_num >= char_map.length
-        rot_num = rot_num - char_map.length
+      rot_total = char_map.index(char) + rot
+      while rot_total >= char_map.length
+        rot_total = rot_total - char_map.length
       end
-      enc_char = char_map[rot_num]
-      # binding.pry
-      enc_msg << enc_char
-      r += 1
+      encrypted_character = char_map[rot_total]
+      encrypted_message << encrypted_character
+      rot_increment += 1
     end
-    enc_msg.join
+    encrypted_message.join
   end
 
 end

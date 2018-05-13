@@ -12,19 +12,19 @@ class Rotation
     date_code[-4..-1]
   end
 
-  def a_rtn
+  def a_rotation
     key[0..1].to_i + offset[0].to_i
   end
 
-  def b_rtn
+  def b_rotation
     key[1..2].to_i + offset[1].to_i
   end
 
-  def c_rtn
+  def c_rotation
     key[2..3].to_i + offset[2].to_i
   end
 
-  def d_rtn
+  def d_rotation
     key[3..4].to_i + offset[3].to_i
   end
 
