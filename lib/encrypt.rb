@@ -51,12 +51,13 @@ class Encrypt
       elsif r == 3
         rot = d_rotation
       end
-      # binding.pry
       rot_num = char_map.index(char) + rot
-      while rot_num > char_map.length
+      binding.pry
+      while rot_num >= char_map.length
         rot_num = rot_num - char_map.length
       end
       enc_char = char_map[rot_num]
+      binding.pry
       enc_msg << enc_char
       r += 1
     end
