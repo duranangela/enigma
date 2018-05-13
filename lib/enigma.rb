@@ -1,16 +1,18 @@
 require 'date'
 require './lib/encrypt'
-require 'pry'
-
+require './lib/decrypt'
 
 class Enigma
 
   def initialize
   end
 
-  def encrypt(my_message, key = random_key, date = today)
-    encrypted_my_message = Encrypt.new(my_message, key, date)
-    encrypted_my_message.output
+  def encrypt(message, key = random_key, date = today)
+    if date = Date.today
+      date = today
+    end
+    encrypted_message = Encrypt.new(message, key, date)
+    encrypted_message.output
   end
 
   def random_key
@@ -19,6 +21,14 @@ class Enigma
 
   def today
     Date.today.strftime('%m%e%y')
+  end
+
+  def decrypt(encrypted_message, key, date = today)
+    if date = Date.today
+      date = today
+    end
+    decrypted_message = Decrypt.new(encrypted_message, key, date)
+    decrypted_message.output
   end
 
 end
