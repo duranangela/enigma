@@ -1,4 +1,4 @@
-require './lib/playground'
+require './lib/rotation'
 require 'pry'
 
 class Decrypt
