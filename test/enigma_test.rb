@@ -25,4 +25,9 @@ class EnigmaTest < Minitest::Test
   #
   #   assert_equal 'my_message', e.encrypt('my_message')
   # end
+
+  # def test_it_encrypts
+  #   e = Enigma.new
+  #   assert_equal 'y3 ws4l2skl5szko', e.encrypt('deal for you and', '12345', '020315')
+  # end
 end
