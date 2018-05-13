@@ -17,11 +17,12 @@ class EnigmaTest < Minitest::Test
   def test_it_gives_todays_date
     e = Enigma.new
     assert_equal Date.today.strftime('%m%e%y'), e.today
-  end 
-
-  def test_it_encrypts
-    e = Enigma.new
-    assert_equal 'msg', e.encrypt('msg')
   end
 
+  # Should we test this here if we're already testing it in the encrypt_test.rb file?
+  #  def test_it_encrypts
+  #   e = Enigma.new
+  #
+  #   assert_equal 'my_message', e.encrypt('my_message')
+  # end
 end
