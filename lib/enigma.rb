@@ -8,6 +8,9 @@ class Enigma
   end
 
   def encrypt(msg, key = random_key, date = today)
+    if date = Date.today
+      date = today
+    end
     encrypted_msg = Encrypt.new(msg, key, date)
     encrypted_msg.output
   end
@@ -21,6 +24,9 @@ class Enigma
   end
 
   def decrypt(enc_msg, key, date = today)
+    if date = Date.today
+      date = today
+    end
     dec_msg = Decrypt.new(enc_msg, key, date)
     dec_msg.output
   end
