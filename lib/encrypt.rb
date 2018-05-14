@@ -1,4 +1,5 @@
 require './lib/rotation'
+require './lib/char_map'
 require 'pry'
 
 class Encrypt
@@ -11,7 +12,7 @@ class Encrypt
     @message = message.split(//)
     @key = key
     @date = date.to_s
-    @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
+    @char_map = Char_map.new.char_map
   end
 
   def rotation
@@ -44,5 +45,5 @@ class Encrypt
     end
     encrypted_message.join
   end
-  
+
 end
