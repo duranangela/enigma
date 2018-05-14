@@ -3,18 +3,24 @@ require './lib/encrypt'
 require './lib/decrypt'
 
 class Enigma
-  attr_reader :key
+  attr_reader :key,
+              :message,
+              :date
 
   def initialize
     @key = key
+    @message = message
+    @date = date
   end
 
   def encrypt(message, key = random_key, date = today)
     @key = key
+    @message = message
+    @date = date
     if date = Date.today
       date = today
     end
-    encrypted_message = Encrypt.new(message, key, date)
+    encrypted_message = Encrypt.new(@message, @key, @date)
     encrypted_message.output
   end
 
