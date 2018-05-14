@@ -3,11 +3,14 @@ require './lib/encrypt'
 require './lib/decrypt'
 
 class Enigma
+  attr_reader :key
 
   def initialize
+    @key = key
   end
 
   def encrypt(message, key = random_key, date = today)
+    @key = key
     if date = Date.today
       date = today
     end
@@ -19,7 +22,7 @@ class Enigma
     rand(0..99999).to_s.rjust(5, '0')
   end
 
-  def today
+  def today #in the correct format
     Date.today.strftime('%m%e%y')
   end
 

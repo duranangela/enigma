@@ -11,7 +11,7 @@ class Decrypt
     @encrypted_message = encrypted_message.split(//)
     @key = key
     @date = date
-    @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
+    @char_map = Char_map.new.char_map
   end
 
   def rotation
@@ -44,3 +44,5 @@ class Decrypt
     end
     decrypted_message.join
   end
+
+end
