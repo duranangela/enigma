@@ -14,7 +14,7 @@ class EncryptTest < Minitest::Test
     assert_equal ["m", "y", " ", "m", "e", "s", "s", "a", "g", "e"], encrypt.message
     assert_equal '12345', encrypt.key
     assert_equal '051318', encrypt.date
-    assert_equal "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//), encrypt.char_map
+    assert_equal "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//), encrypt.charmap
   end
 
   def test_only_message_argument_needed
