@@ -1,6 +1,6 @@
-class Char_map
+class CharMap
 
-  def char_map
+  def charmap
     lower_case = ("a".."z").to_a
     numbers = (0..9).to_a.join.chars
     extra_characters = ' .,'.split(//)

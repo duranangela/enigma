@@ -5,13 +5,13 @@ class Decrypt
   attr_reader :encrypted_message,
               :key,
               :date,
-              :char_map
+              :charmap
 
   def initialize(encrypted_message, key, date)
     @encrypted_message = encrypted_message.split(//)
     @key = key
     @date = date
-    @char_map = Char_map.new.char_map
+    @charmap = CharMap.new.charmap
   end
 
   def rotation
@@ -34,11 +34,11 @@ class Decrypt
       elsif rot_increment == 3
         rot = rotation.d_rotation
       end
-      rot_num = char_map.index(char) - rot
+      rot_num = charmap.index(char) - rot
       while rot_num < 0
-        rot_num = rot_num + char_map.length
+        rot_num = rot_num + charmap.length
       end
-      decrypted_character = char_map[rot_num]
+      decrypted_character = charmap[rot_num]
       decrypted_message << decrypted_character
       rot_increment += 1
     end
