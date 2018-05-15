@@ -12,6 +12,7 @@ class Decrypt
     @key = key
     @date = date
     @charmap = CharMap.new.charmap
+    binding.pry
   end
 
   def rotation
@@ -34,11 +35,11 @@ class Decrypt
       elsif rot_increment == 3
         rot = rotation.d_rotation
       end
-      rot_num = charmap.index(char) - rot
-      while rot_num < 0
-        rot_num = rot_num + charmap.length
+      rot_total = charmap.index(char) - rot
+      while rot_total < 0
+        rot_total = rot_total + charmap.length
       end
-      decrypted_character = charmap[rot_num]
+      decrypted_character = charmap[rot_total]
       decrypted_message << decrypted_character
       rot_increment += 1
     end
