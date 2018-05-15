@@ -1,4 +1,5 @@
 require './lib/rotation'
+require './lib/charmap'
 require 'pry'
 
 class Decrypt

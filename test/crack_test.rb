@@ -19,8 +19,8 @@ class CrackTest < Minitest::Test
 
   def test_it_can_crack
     skip
-    crack = Crack.new('y3 ws4l2skl5szko', '020315')
-    assert_equal 'deal for you and', crack.output
+    crack = Crack.new('y3 ws4l2skl5szkosx8p828j', '020315')
+    assert_equal 'deal for you and ..end..', crack.output
   end
 
   def test_it_can_crack_a_different_message
