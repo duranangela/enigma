@@ -17,28 +17,25 @@ class EncryptTest < Minitest::Test
     assert_equal "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//), encrypt.charmap
   end
 
-  def test_only_message_argument_needed
-    skip
-    encrypt = Encrypt.new('my_message')
-
-    assert_equal ["m", "y", "_", "m", "e", "s", "s", "a", "g", "e"], encrypt.my_message
-  end
-
-  def test_only_message_and_date_argument_needed
-    skip
-    encrypt = Encrypt.new('my_message', '020315')
-
-    assert_equal ["m", "y", "_", "m", "e", "s", "s", "a", "g", "e"], encrypt.my_message
-    assert_equal '020315', encrypt.date
-  end
-
   def test_the_a__b_c_d_of_rotations
-    encrypt = Encrypt.new('my_message', '12345', '020315')
+    encrypt = Encrypt.new('my message', '12345', '020315')
 
     assert_equal 21, encrypt.rotation.a_rotation
     assert_equal 25, encrypt.rotation.b_rotation
     assert_equal 36, encrypt.rotation.c_rotation
     assert_equal 50, encrypt.rotation.d_rotation
+  end
+
+  def test_it_encrypts
+    encrypt = Encrypt.new('my message', '12345', '051318')
+
+    assert_equal "5j7wxdpkz2", encrypt.output
+  end
+
+  def test_it_encrypts_something_different
+    encrypt = Encrypt.new('secret message ..end..', '54321', '020315')
+    
+    assert_equal "dk e2z5,2yn04k5ywki3we", encrypt.output
   end
 
 end
