@@ -17,7 +17,7 @@ class EnigmaTest < Minitest::Test
   def test_it_gives_todays_date_in_the_right_format
     e = Enigma.new
     assert_equal Date.today.strftime('%m%e%y'), e.today
-  end  
+  end
 
   def test_it_encrypts_with_key_and_date
     e = Enigma.new
