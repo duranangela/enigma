@@ -24,7 +24,6 @@ class EnigmaTest < Minitest::Test
     assert_equal "a3,2zf7xzepl137jt3kotx", e.encrypt('secret message ..end..', '12345', '020315')
   end
 
-
   def test_it_decrypts_with_key_and_date
     e = Enigma.new
     assert_equal 'secret message ..end..', e.decrypt("a3,2zf7xzepl137jt3kotx", '12345', '020315')
@@ -34,11 +33,4 @@ class EnigmaTest < Minitest::Test
     e = Enigma.new
     assert_equal 'secret message ..end..', e.crack("a3,2zf7xzepl137jt3kotx", '020315')
   end
-  
-  # Should we test this here if we're already testing it in the encrypt_test.rb file?
-  #  def test_it_encrypts
-  #   e = Enigma.new
-  #
-  #   assert_equal 'my_message', e.encrypt('my_message')
-  # end
 end
