@@ -1,17 +1,18 @@
 require './lib/rotation'
+require './lib/charmap'
 require 'pry'
 
 class Encrypt
   attr_reader :message,
               :key,
               :date,
-              :char_map
+              :charmap
 
   def initialize(message, key, date)
     @message = message.split(//)
     @key = key
     @date = date.to_s
-    @char_map = "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//)
+    @charmap = CharMap.new.charmap
   end
 
   def rotation
@@ -34,15 +35,15 @@ class Encrypt
       elsif rot_increment == 3
         rot = rotation.d_rotation
       end
-      rot_total = char_map.index(char) + rot
-      while rot_total >= char_map.length
-        rot_total = rot_total - char_map.length
+      rot_total = charmap.index(char) + rot
+      while rot_total >= charmap.length
+        rot_total = rot_total - charmap.length
       end
-      encrypted_character = char_map[rot_total]
+      encrypted_character = charmap[rot_total]
       encrypted_message << encrypted_character
       rot_increment += 1
     end
     encrypted_message.join
   end
-  
+
 end
