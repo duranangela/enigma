@@ -1,6 +1,7 @@
 require 'date'
 require './lib/encrypt'
 require './lib/decrypt'
+require './lib/crack'
 
 class Enigma
   attr_reader :key,
@@ -41,6 +42,15 @@ class Enigma
     end
     decrypted_message = Decrypt.new(encrypted_message, key, @decrypt_date)
     decrypted_message.output
+  end
+
+  def crack(encrypted_message, date = today)
+    if decrypt_date = Date.today
+      decrypt_date = today
+    end
+    cracked_key = Crack.new(encrypted_message, date)
+    cracked_message = decrypt(encrypted_message, cracked_key.key_output, date)
+    cracked_message
   end
 
 end

@@ -1,4 +1,5 @@
 require './lib/rotation'
+require './lib/charmap'
 require 'pry'
 
 class Decrypt
@@ -12,7 +13,6 @@ class Decrypt
     @key = key
     @date = date
     @charmap = CharMap.new.charmap
-    binding.pry
   end
 
   def rotation
