@@ -11,22 +11,23 @@ class CrackTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    crack = Crack.new('y3 ws4l2skl5szko', '020315')
-    assert_equal 'y3 ws4l2skl5szko'.split(//), crack.encrypted_message
+    crack = Crack.new("a3,2zf7xzepl137jt3kotx", '020315')
+    assert_equal "a3,2zf7xzepl137jt3kotx", crack.encrypted_message
     assert_equal '020315', crack.date
-    assert_equal "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//), crack.charmap
+    assert_equal '00000', crack.key
   end
 
-  def test_it_can_crack
-    skip
-    crack = Crack.new('y3 ws4l2skl5szko', '020315')
-    assert_equal 'deal for you and', crack.output
+  def test_it_can_figure_out_the_key
+    # skip
+    crack = Crack.new("a3,2zf7xzepl137jt3kotx", '020315')
+    # binding.pry
+    assert_equal '12345', crack.key_output
   end
 
-  def test_it_can_crack_a_different_message
-    skip
-    crack = Crack.new("lx1c2y.ug  u5,xcg2xu77tzcnrv93wv3", '051418')
-    assert_equal 'this is our awesome crack ..end..', crack.output
+  def test_it_can_crack_a_different_key
+    # skip
+    crack = Crack.new("4zv7i05mz,4mlbr7z4rmn9nrvplnp5qnj", '051418')
+    assert_equal '11111', crack.key_output
   end
 
 end

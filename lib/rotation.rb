@@ -1,5 +1,4 @@
 require './lib/offset'
-require 'pry'
 
 class Rotation
   attr_reader :key,
@@ -10,7 +9,6 @@ class Rotation
     @key = key
     @date = date
     @offset = Offset.new.offset(date)
-    # binding.pry
   end
 
   def a_rotation
