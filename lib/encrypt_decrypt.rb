@@ -27,8 +27,8 @@ class EncryptDecrypt
       while rot_num < 0
         rot_num = rot_num + charmap.length
       end
-      in_character = charmap[rot_num]
-      out_message << in_character
+      out_character = charmap[rot_num]
+      out_message << out_character
     end
     out_message.join
   end

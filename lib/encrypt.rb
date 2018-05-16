@@ -3,13 +3,13 @@ require './lib/charmap'
 require 'pry'
 
 class Encrypt
-  attr_reader :message,
+  attr_reader :in_message,
               :key,
               :date,
               :charmap
 
-  def initialize(message, key, date)
-    @message = message.split(//)
+  def initialize(in_message, key, date)
+    @in_message = in_message.split(//)
     @key = key
     @date = date.to_s
     @charmap = CharMap.new.charmap
@@ -20,30 +20,25 @@ class Encrypt
   end
 
   def output
-    encrypted_message = []
-    rot_increment = 0
-    message.each do |char|
-      if rot_increment == 4
-        rot_increment = 0
+    out_message = []
+    in_message.each_with_index do |char, index|
+      rot = get_rotation(index)
+      rot_num = charmap.index(char) + rot
+      while rot_num >= charmap.length
+        rot_num = rot_num - charmap.length
       end
-      if rot_increment == 0
-        rot = rotation.a_rotation
-      elsif rot_increment == 1
-        rot = rotation.b_rotation
-      elsif rot_increment == 2
-        rot = rotation.c_rotation
-      elsif rot_increment == 3
-        rot = rotation.d_rotation
-      end
-      rot_total = charmap.index(char) + rot
-      while rot_total >= charmap.length
-        rot_total = rot_total - charmap.length
-      end
-      encrypted_character = charmap[rot_total]
-      encrypted_message << encrypted_character
-      rot_increment += 1
+      out_character = charmap[rot_num]
+      out_message << out_character
     end
-    encrypted_message.join
+    out_message.join
+  end
+
+  def get_rotation(increment)
+    offset = increment % 4
+    return rotation.a_rotation if offset == 0
+    return rotation.b_rotation if offset == 1
+    return rotation.c_rotation if offset == 2
+    return rotation.d_rotation if offset == 3
   end
 
 end
