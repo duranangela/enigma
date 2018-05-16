@@ -14,7 +14,7 @@ class Crack
 
   def key_output
     match = EncryptDecrypt.new(@encrypted_message, @key, @date)
-    until match.output[-7..-1] == "..end.."
+    until match.decrypt[-7..-1] == "..end.."
       @key = (@key.to_i + 1).to_s.rjust(5, '0')
       match = EncryptDecrypt.new(@encrypted_message, @key, @date)
     end

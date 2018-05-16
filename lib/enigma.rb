@@ -1,6 +1,5 @@
 require 'date'
 require './lib/encrypt_decrypt'
-require './lib/encryptor'
 require './lib/cracker'
 require 'pry'
 
@@ -12,18 +11,18 @@ class Enigma
               :crack_date
 
   def initialize
-    @key = key
-    @date = date
+    @key          = key
+    @date         = date
     @decrypt_date = decrypt_date
-    @crack_date
+    @crack_date   = crack_date
   end
 
   def encrypt(message, key = random_key, date = today)
     @key = key
     @date = date
     @date = today if @date == Date.today
-    encrypted_message = Encrypt.new(message, @key, @date)
-    encrypted_message.output
+    encrypted_message = EncryptDecrypt.new(message, @key, @date)
+    encrypted_message.encrypt
   end
 
   def random_key
@@ -38,7 +37,7 @@ class Enigma
     @decrypt_date = decrypt_date
     @decrypt_date = today if @decrypt_date == Date.today
     decrypted_message = EncryptDecrypt.new(encrypted_message, key, @decrypt_date)
-    decrypted_message.output
+    decrypted_message.decrypt
   end
 
   def crack(encrypted_message, crack_date = today)

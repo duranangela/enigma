@@ -19,13 +19,27 @@ class EncryptDecrypt
     Rotation.new(@key, @date)
   end
 
-  def output
+  def decrypt
     out_message = []
     in_message.each_with_index do |char, index|
       rot = get_rotation(index)
       rot_num = charmap.index(char) - rot
       while rot_num < 0
         rot_num = rot_num + charmap.length
+      end
+      out_character = charmap[rot_num]
+      out_message << out_character
+    end
+    out_message.join
+  end
+
+  def encrypt
+    out_message = []
+    in_message.each_with_index do |char, index|
+      rot = get_rotation(index)
+      rot_num = charmap.index(char) + rot
+      while rot_num >= charmap.length
+        rot_num = rot_num - charmap.length
       end
       out_character = charmap[rot_num]
       out_message << out_character
