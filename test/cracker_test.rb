@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/crack'
+require './lib/cracker'
 require 'pry'
 
 class CrackTest < Minitest::Test
