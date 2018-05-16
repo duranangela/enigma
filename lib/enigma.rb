@@ -11,19 +11,15 @@ class Enigma
 
   def initialize
     @key = key
-    @message = message
     @date = date
     @decrypt_date = decrypt_date
   end
 
   def encrypt(message, key = random_key, date = today)
     @key = key
-    @message = message
     @date = date
-    if date = Date.today
-      date = today
-    end
-    encrypted_message = Encrypt.new(@message, @key, @date)
+    date = today if date = Date.today
+    encrypted_message = Encrypt.new(message, @key, @date)
     encrypted_message.output
   end
 
@@ -37,9 +33,7 @@ class Enigma
 
   def decrypt(encrypted_message, key, decrypt_date = today)
     @decrypt_date = decrypt_date
-    if decrypt_date = Date.today
-      decrypt_date = today
-    end
+    decrypt_date = today if decrypt_date = Date.today
     decrypted_message = Decrypt.new(encrypted_message, key, @decrypt_date)
     decrypted_message.output
   end
