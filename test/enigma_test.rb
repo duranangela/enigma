@@ -15,6 +15,13 @@ class EnigmaTest < Minitest::Test
     assert_equal 5, e.random_key.length
   end
 
+  def test_it_makes_random_keys
+    e = Enigma.new
+    array = []
+    100.times {array << e.random_key}
+    assert array.length == array.uniq.length
+  end
+
   def test_it_gives_todays_date_in_the_right_format
     e = Enigma.new
     assert_equal Date.today.strftime('%m%e%y'), e.today
@@ -22,16 +29,16 @@ class EnigmaTest < Minitest::Test
 
   def test_it_encrypts_with_key_and_date
     e = Enigma.new
-    assert_equal "a3,2zf7xzepl137jt3kotx", e.encrypt('secret message ..end..', '12345', '020315')
+    assert_equal ',af2qbph.h72x8oo,38ixgair', e.encrypt('this is so secret ..end..', '12345', '051618')
   end
 
   def test_it_decrypts_with_key_and_date
     e = Enigma.new
-    assert_equal 'secret message ..end..', e.decrypt("a3,2zf7xzepl137jt3kotx", '12345', '020315')
+    assert_equal 'this is so secret ..end..', e.decrypt(',af2qbph.h72x8oo,38ixgair', '12345', '051618')
   end
 
   def test_it_cracks_with_date
     e = Enigma.new
-    assert_equal 'secret message ..end..', e.crack("a3,2zf7xzepl137jt3kotx", '020315')
+    assert_equal 'this is so secret ..end..', e.crack(',af2qbph.h72x8oo,38ixgair', '051618')
   end
 end
