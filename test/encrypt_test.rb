@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/encrypt'
+require './lib/encryptor'
 
 class EncryptTest < Minitest::Test
 
@@ -11,7 +11,7 @@ class EncryptTest < Minitest::Test
 
   def test_it_has_attributes
     encrypt = Encrypt.new('my message', '12345', '051318')
-    assert_equal ["m", "y", " ", "m", "e", "s", "s", "a", "g", "e"], encrypt.message
+    assert_equal ["m", "y", " ", "m", "e", "s", "s", "a", "g", "e"], encrypt.in_message
     assert_equal '12345', encrypt.key
     assert_equal '051318', encrypt.date
     assert_equal "abcdefghijklmnopqrstuvwxyz0123456789 .,".split(//), encrypt.charmap
@@ -34,7 +34,7 @@ class EncryptTest < Minitest::Test
 
   def test_it_encrypts_something_different
     encrypt = Encrypt.new('secret message ..end..', '54321', '020315')
-    
+
     assert_equal "dk e2z5,2yn04k5ywki3we", encrypt.output
   end
 
