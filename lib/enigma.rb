@@ -5,16 +5,17 @@ require 'pry'
 
 class Enigma
   attr_reader :key,
-              :message,
               :date,
               :decrypt_date,
-              :crack_date
+              :crack_date,
+              :cracked_key
 
   def initialize
     @key          = key
     @date         = date
     @decrypt_date = decrypt_date
     @crack_date   = crack_date
+    @cracked_key  = cracked_key
   end
 
   def encrypt(message, key = random_key, date = today)
@@ -34,6 +35,7 @@ class Enigma
   end
 
   def decrypt(encrypted_message, key, decrypt_date = today)
+    @key = key
     @decrypt_date = decrypt_date
     @decrypt_date = today if @decrypt_date == Date.today
     decrypted_message = EncryptDecrypt.new(encrypted_message, key, @decrypt_date)
@@ -43,8 +45,9 @@ class Enigma
   def crack(encrypted_message, crack_date = today)
     @crack_date = crack_date
     @crack_date = today if @crack_date == Date.today
-    cracked_key = Crack.new(encrypted_message, @crack_date)
-    cracked_message = decrypt(encrypted_message, cracked_key.key_output, @crack_date)
+    key_output = Crack.new(encrypted_message, @crack_date)
+    @cracked_key = key_output.key_output
+    cracked_message = decrypt(encrypted_message, @cracked_key, @crack_date)
     cracked_message
   end
 
