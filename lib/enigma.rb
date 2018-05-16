@@ -1,4 +1,5 @@
 require 'date'
+require './lib/encrypt_decrypt'
 require './lib/encrypt'
 require './lib/decrypt'
 require './lib/crack'
@@ -34,9 +35,15 @@ class Enigma
   def decrypt(encrypted_message, key, decrypt_date = today)
     @decrypt_date = decrypt_date
     decrypt_date = today if decrypt_date = Date.today
-    decrypted_message = Decrypt.new(encrypted_message, key, @decrypt_date)
+    decrypted_message = EncryptDecrypt.new(encrypted_message, key, @decrypt_date)
     decrypted_message.output
   end
+
+  # def decrypt(message, key, date = today)
+  #   date = today if date = Date.today
+  #   decrypted_message = EncryptDecrypt.new(decrypt, message, key, date)
+  #   decrypted_message.output
+  # end
 
   def crack(encrypted_message, date = today)
     if decrypt_date = Date.today
