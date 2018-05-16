@@ -44,4 +44,14 @@ class RotationTest < Minitest::Test
     assert_equal 25, rotation.d_rotation
   end
 
+  def test_it_returns_correct_date_code
+    rotation = Rotation.new('12345', '020315')
+    assert_equal '9225', rotation.offset
+  end
+
+  def test_it_returns_datecode_with_a_different_date
+    rotation = Rotation.new('54321', '123178')
+    assert_equal '9684', rotation.offset
+  end
+
 end
