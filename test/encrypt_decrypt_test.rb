@@ -2,7 +2,6 @@ require './test/test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/encrypt_decrypt'
-require 'pry'
 
 class EncryptDecryptTest < Minitest::Test
 

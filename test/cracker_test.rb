@@ -2,7 +2,6 @@ require './test/test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/cracker'
-require 'pry'
 
 class CrackTest < Minitest::Test
 

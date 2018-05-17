@@ -1,6 +1,5 @@
 require './lib/rotation'
 require './lib/charmap'
-require 'pry'
 
 class EncryptDecrypt
   attr_reader :switch,
