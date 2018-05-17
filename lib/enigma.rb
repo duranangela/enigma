@@ -22,8 +22,8 @@ class Enigma
     @key = key
     @date = date
     @date = today if @date == Date.today
-    encrypted_message = EncryptDecrypt.new(message, @key, @date)
-    encrypted_message.encrypt
+    encrypted_message = EncryptDecrypt.new('enc', message, @key, @date)
+    encrypted_message.output
   end
 
   def random_key
@@ -38,8 +38,8 @@ class Enigma
     @key = key
     @decrypt_date = decrypt_date
     @decrypt_date = today if @decrypt_date == Date.today
-    decrypted_message = EncryptDecrypt.new(encrypted_message, key, @decrypt_date)
-    decrypted_message.decrypt
+    decrypted_message = EncryptDecrypt.new('dec', encrypted_message, key, @decrypt_date)
+    decrypted_message.output
   end
 
   def crack(encrypted_message, crack_date = today)

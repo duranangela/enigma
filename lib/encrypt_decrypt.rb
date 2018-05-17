@@ -3,12 +3,14 @@ require './lib/charmap'
 require 'pry'
 
 class EncryptDecrypt
-  attr_reader :in_message,
+  attr_reader :switch,
+              :in_message,
               :key,
               :date,
               :charmap
 
-  def initialize(in_message, key, date)
+  def initialize(switch, in_message, key, date)
+    @switch = switch
     @in_message = in_message.split(//)
     @key = key
     @date = date
@@ -19,13 +21,14 @@ class EncryptDecrypt
     Rotation.new(@key, @date)
   end
 
-  def decrypt
+  def output
     out_message = []
     in_message.each_with_index do |char, index|
       rot = get_rotation(index)
-      rot_num = charmap.index(char) - rot
-      while rot_num < 0
-        rot_num = rot_num + charmap.length
+      if switch == 'enc'
+        rot_num = encrypt_switch(char, rot)
+      elsif switch == 'dec'
+        rot_num = decrypt_switch(char, rot)
       end
       out_character = charmap[rot_num]
       out_message << out_character
@@ -33,18 +36,20 @@ class EncryptDecrypt
     out_message.join
   end
 
-  def encrypt
-    out_message = []
-    in_message.each_with_index do |char, index|
-      rot = get_rotation(index)
-      rot_num = charmap.index(char) + rot
-      while rot_num >= charmap.length
-        rot_num = rot_num - charmap.length
-      end
-      out_character = charmap[rot_num]
-      out_message << out_character
+  def encrypt_switch(char, rot)
+    rot_num = charmap.index(char) + rot
+    while rot_num >= charmap.length
+      rot_num = rot_num - charmap.length
     end
-    out_message.join
+    rot_num
+  end
+
+  def decrypt_switch(char, rot)
+    rot_num = charmap.index(char) - rot
+    while rot_num < 0
+      rot_num = rot_num + charmap.length
+    end
+    rot_num
   end
 
   def get_rotation(increment)
