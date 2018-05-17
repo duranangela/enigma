@@ -29,16 +29,16 @@ class EnigmaTest < Minitest::Test
 
   def test_it_encrypts_with_key_and_date
     e = Enigma.new
-    assert_equal ',af2qbph.h72x8oo,38ixgair', e.encrypt('this is so secret ..end..', '12345', '051618')
+    assert_equal '@#*I/$:a!)NIx8;;@Jbox(#oK', e.encrypt('this is so secret ..end..', '12345', '051618')
   end
 
   def test_it_decrypts_with_key_and_date
     e = Enigma.new
-    assert_equal 'this is so secret ..end..', e.decrypt(',af2qbph.h72x8oo,38ixgair', '12345', '051618')
+    assert_equal 'this is so secret ..end..', e.decrypt('@#*I/$:a!)NIx8;;@Jbox(#oK', '12345', '051618')
   end
 
   def test_it_cracks_with_date
     e = Enigma.new
-    assert_equal 'this is so secret ..end..', e.crack(',af2qbph.h72x8oo,38ixgair', '051618')
+    assert_equal 'this is so secret ..end..', e.crack('@#*I/$:a!)NIx8;;@Jbox(#oK', '051618')
   end
 end

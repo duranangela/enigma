@@ -52,8 +52,8 @@ class EncryptDecrypt
     rot_num
   end
 
-  def get_rotation(increment)
-    offset = increment % 4
+  def get_rotation(index)
+    offset = index % 4
     return rotation.a_rotation if offset == 0
     return rotation.b_rotation if offset == 1
     return rotation.c_rotation if offset == 2
