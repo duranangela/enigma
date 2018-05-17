@@ -1,5 +1,3 @@
-require './lib/offset'
-
 class Rotation
   attr_reader :key,
               :date,
@@ -8,7 +6,11 @@ class Rotation
   def initialize(key, date)
     @key = key
     @date = date
-    @offset = Offset.new.offset(date)
+  end
+
+  def offset
+    date_code = (date.to_i ** 2).to_s
+    date_code[-4..-1]
   end
 
   def a_rotation

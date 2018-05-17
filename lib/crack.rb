@@ -1,23 +1,14 @@
-require './lib/decrypt'
+require './lib/enigma'
 
-class Crack
-  attr_reader :encrypted_message,
-              :date,
-              :key
+file = File.open(ARGV[0], 'r')
+incoming_text = file.read.chomp
+file.close
 
-  def initialize(encrypted_message, date)
-    @encrypted_message = encrypted_message
-    @date = date
-    @key = '00000'
-  end
+e = Enigma.new
+output = e.crack(incoming_text, ARGV[2])
 
-  def key_output
-    match = Decrypt.new(@encrypted_message, @key, @date)
-    until match.output[-7..-1] == "..end.."
-      @key = (@key.to_i + 1).to_s.rjust(5, '0')
-      match = Decrypt.new(@encrypted_message, @key, @date)
-    end
-    @key
-  end
+new_file = File.open(ARGV[1], 'w')
+new_file.write(output)
+new_file.close
 
-end
+puts "Created 'cracked.txt' with the cracked key #{e.cracked_key} and date #{e.crack_date}"

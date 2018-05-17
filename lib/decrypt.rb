@@ -1,49 +1,14 @@
-require './lib/rotation'
-require './lib/charmap'
-require 'pry'
+require './lib/enigma'
 
-class Decrypt
-  attr_reader :encrypted_message,
-              :key,
-              :date,
-              :charmap
+file = File.open(ARGV[0], 'r')
+incoming_text = file.read.chomp
+file.close
 
-  def initialize(encrypted_message, key, date)
-    @encrypted_message = encrypted_message.split(//)
-    @key = key
-    @date = date
-    @charmap = CharMap.new.charmap
-  end
+e = Enigma.new
+output = e.decrypt(incoming_text, ARGV[2], ARGV[3])
 
-  def rotation
-    Rotation.new(@key, @date)
-  end
+new_file = File.open(ARGV[1], 'w')
+new_file.write(output)
+new_file.close
 
-  def output
-    decrypted_message = []
-    rot_increment = 0
-    encrypted_message.each do |char|
-      if rot_increment == 4
-        rot_increment = 0
-      end
-      if rot_increment == 0
-        rot = rotation.a_rotation
-      elsif rot_increment == 1
-        rot = rotation.b_rotation
-      elsif rot_increment == 2
-        rot = rotation.c_rotation
-      elsif rot_increment == 3
-        rot = rotation.d_rotation
-      end
-      rot_total = charmap.index(char) - rot
-      while rot_total < 0
-        rot_total = rot_total + charmap.length
-      end
-      decrypted_character = charmap[rot_total]
-      decrypted_message << decrypted_character
-      rot_increment += 1
-    end
-    decrypted_message.join
-  end
-
-end
+puts "Created 'decrypted.txt' with the key #{e.key} and date #{e.decrypt_date}"
